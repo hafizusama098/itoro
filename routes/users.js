@@ -476,7 +476,7 @@ async function generateTasksForUsers() {
   await lock.acquire('generateTasksForUsers', async function () {
     try {
       const users = await User.find();
-      console.log("hahahahahah");
+      console.log("Starting the task generation");
 
       console.log(`Total users: ${users.length}`);
 
@@ -486,7 +486,7 @@ async function generateTasksForUsers() {
 
         const maxTasks = getMaxTasksForUser(user.level);
         const userTasks = user.tasks || [];
-        const tasksToGenerate = Math.min(3, maxTasks - userTasks.length);
+        const tasksToGenerate = Math.min(40, maxTasks - userTasks.length);
 
         for (let i = 0; i < tasksToGenerate; i++) {
 
@@ -516,12 +516,13 @@ async function generateTasksForUsers() {
 function getMaxTasksForUser(level) {
   // Define the maximum tasks per VIP level
   const maxTasksByLevel = {
-      1: 10,
-      2: 15,
-      3: 20,
-      4: 25,
-      5: 30,
-      6: 35,
+      0: 40,
+      1: 40,
+      2: 40,
+      3: 40,
+      4: 40,
+      5: 40,
+      6: 40,
   };
 
   return maxTasksByLevel[level] || 0;
@@ -532,8 +533,9 @@ function getMaxTasksForUser(level) {
 
 function calculateExpirationTime() {
   const currentTime = moment.tz('America/New_York'); // Set the appropriate timezone
-  return currentTime.add(59, 'minutes').toDate();
+  return currentTime.add(23, 'hours').add(59, 'minutes').toDate();
 }
+
 
 
 // Schedule the job to run every 1 minute
@@ -550,6 +552,8 @@ const dailyTaskGeneration = schedule.scheduleJob('*/59 * * * *', function () {
   console.log('Scheduled task generation started.');
   generateTasksForUsers();
 });
+
+
 
 // Schedule the job for clearing tasks to run once daily at 8:00 AM in America/New_York time zone
 const clearTasks = schedule.scheduleJob({ hour: 8, minute: 0, tz: 'America/New_York' }, function () {
@@ -632,7 +636,7 @@ async function claimTask(user, taskId) {
     task.claimedAt = new Date();
     await task.save();
     user1.claimedTasks.push(task);
-    user1.account.balance = user1.account.balance + 0.8;
+    user1.account.balance = user1.account.balance + 1;
 
     await user1.save();
 
@@ -653,7 +657,7 @@ router.get('/claim-task/:id',checkAuth, async (req, res) => {
 
   if (claimed) {
     //res.status(200).json({ message: 'Task claimed successfully.' });
-    res.redirect("https://shrinkearn.com/st?api=67d219dd9d6fa101eb0e236123b286efa0b60771&url=https://itoro-production.up.railway.app/users/tasks")
+    res.redirect("/users/tasks")
   } else {
     res.status(400).json({ message: 'Task is no longer claimable.' });
   }

@@ -66,8 +66,7 @@ body{
     height: 100vh;
     font-family: 'Poppins', sans-serif;
     font-size: 0.88rem;
-    user-select: none;
-    overflow-x: hidden;
+    user-select: text;
     color: var(--color-dark);
     background-color: var(--color-background);
 }
@@ -721,6 +720,13 @@ main .recent-orders a{
         font-size: 2rem;
     }
 
+    /* Ensure all headers are visible on smaller screens */
+@media (max-width: 600px) {
+    main .recent-orders table tbody tr  td {
+        display: table-cell;
+    }
+}
+
 }
 </style>
 </head>
@@ -787,18 +793,20 @@ main .recent-orders a{
             <div class="recent-orders">
             
 <!-- Pagination -->
-<table>
+<table style="    overflow-x: scroll;
+">
     <thead>
         <tr>
            
             
-            <th>Status</th>   
             <th>Manage</th>
  
             <th>Name</th>
+            <th>Email</th>
+
             <th>Balance</th>
-            <th>Created</th>
-     
+            <th>Status</th>   
+
         </tr>
     </thead>
     <tbody>
@@ -809,6 +817,13 @@ main .recent-orders a{
                     
                    
                
+               
+                <td><a href="<%= process.env.BASE_URL %>/users/edit/<%= user._id %>">Manage</a>
+
+                <td><%= user.name %></td>
+                <td><%= user.phoneNumber %></td>
+
+                <td>$<%= user.account.balance %></td>
                 <td>
                     <% if (user.status === 'active') { %>
                         <span class="success"><%= user.status %></span>
@@ -818,12 +833,6 @@ main .recent-orders a{
                         <span class="danger"><%= user.status %></span>
                     <% } %>
                 </td>
-                <td><a href="<%= process.env.BASE_URL %>/users/edit/<%= user._id %>">Manage</a>
-
-                <td><%= user.name %></td>
-
-                <td>$<%= user.account.balance %></td>
-                <td><%= user.createdAt %></td>
                
             </tr>
         <% }); %>

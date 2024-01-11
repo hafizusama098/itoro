@@ -186,18 +186,23 @@
       justify-content: center;   display: flex;
    
    flex-direction: column;margin-top: 20px;">
-  <h2 class="text-white" >Welcome</h2>
+   <div style="text-align: center;">
+    <h2 class="text-white">Welcome</h2>
+    <h3 class="text-white text-small"><%= user.name %></h3>
+  </div>
+  
+ <!-- <h2 class="text-white" >Welcome</h2>
   <div class="user-info-container">
     <h3 class="text-white text-small"><%= user.name %></h3>
     <% if (userVIPBadge) { %>
         <div class="badge1">
             <span class="vip-badge text-white">
                 Lvl <%= userVIPBadge.level %> 
-                <img src="<%= userVIPBadge.badge %>" style="height: 30px; width: 30px;" alt="VIP Badge" class="vip-badge-img" /> <!-- Display the badge image -->
+                <img src="<%= userVIPBadge.badge %>" style="height: 30px; width: 30px;" alt="VIP Badge" class="vip-badge-img" />  
             </span>
         </div>
     <% } %>
-</div>
+</div> -->
       </div>
     
       <div class="container text-center my-5 icon-container"> <!-- Apply the background color here -->
@@ -257,7 +262,7 @@
     </div>
 
 
-
+<!--
     <div class="container text-center mt-0 badge-container">
 
       <div class="row">
@@ -323,9 +328,9 @@
             </div>
         </div>
     </div>
-  </div>
+  </div>-->
 
-<section style="margin-top: 40px;">
+<section style="margin-top: 20px;">
 
 </section>
 

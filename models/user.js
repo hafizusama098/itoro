@@ -55,7 +55,7 @@ const userSchema = new mongoose.Schema({
     account: {
       balance: {
         type: Number,
-        default: 10, // Set the default balance to 10
+        default: 0, // Set the default balance to 10
       },
       withdrawnAmount: {
         type: Number,
