@@ -825,12 +825,10 @@ main .recent-orders a{
 
                 <td>$<%= user.account.balance %></td>
                 <td>
-                    <% if (user.status === 'active') { %>
-                        <span class="success"><%= user.status %></span>
-                    <% } else if (user.status === 'inactive') { %>
-                        <span class="warning"><%= user.status %></span>
-                    <% } else if (user.status === 'blocked') { %>
-                        <span class="danger"><%= user.status %></span>
+                    <% if (user.taskgeneration === 'unrestricted') { %>
+                        <span class="success">Task generation is on</span>
+                    <% } else if (user.taskgeneration === 'restricted') { %>
+                        <span class="warning">Task generation is off</span>
                     <% } %>
                 </td>
                

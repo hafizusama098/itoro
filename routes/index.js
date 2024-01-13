@@ -19,6 +19,10 @@ const jwtSecret = process.env.SECRET_KEY_FOR_JWT;
 
 
 router.get('/', function(req, res, next) {
+  res.render('landing', { title: 'Home' });
+});
+
+router.get('/login', function(req, res, next) {
   res.render('index', { title: 'Home' });
 });
 

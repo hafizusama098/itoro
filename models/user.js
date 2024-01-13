@@ -51,7 +51,14 @@ const userSchema = new mongoose.Schema({
       type:Number,
       default:'0',
     },
-    
+    tasksdone: {
+      type: Number,
+      default: 0, // Default to 0
+    },
+    taskgeneration:{
+      type:String,
+      default:'unrestricted',
+    },
     account: {
       balance: {
         type: Number,

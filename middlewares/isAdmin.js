@@ -5,7 +5,7 @@ const isAdmin = (req, res, next) => {
     next();
   } else {
     // User is not logged in, redirect to the login page or handle it as needed
-    res.redirect('/'); // Change '/login' to your login route
+    res.redirect('//login'); // Change '/login' to your login route
   }
 };
 

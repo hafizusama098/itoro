@@ -306,15 +306,36 @@ body{
             cursor: pointer;
         }
 
+        .navbar {
+  overflow: hidden;
+  background-color: transparent; /* Set the background color to transparent */
+  position: fixed;
+  top: 0;
+  width: 100%;
+  transition: background-color 0.3s; /* Add a smooth transition for the background color */
+}
+
+.navbar a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
     </style>
 </head>
 
 <body>
 
- 
+  <div class="navbar" id="navbar">
+    <a href="<%= process.env.BASE_URL %>" style="margin-left: 15px;font-weight: bolder; font-size: x-large;"><h1>iToro</h1> </a>
+  
+  </div>
   <div class="">
-    <section>
-      <h1 class="text-white text-lg ">Welcome!</h1>
+    <section style="margin-top: 35px;">
+      <h2 class="text-white text-lg "></h2>
     </section>
   </div>
 

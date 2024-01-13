@@ -410,6 +410,32 @@ router.get('/status/block/:id',isAdmin,checkAuth, async function(req, res, next)
   }
 });
 
+router.get('/tasks/enable/:id',isAdmin,checkAuth, async function(req, res, next) {
+ 
+  try {
+    const user = await User.findById(req.params.id)
+    user.taskgeneration="unrestricted"
+    user.tasksdone=0;
+    await user.save();
+    res.render('admin/edituser',{user})
+  } catch (err) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+router.get('/tasks/disable/:id',isAdmin,checkAuth, async function(req, res, next) {
+ 
+  try {
+    const user = await User.findById(req.params.id)
+    user.taskgeneration="restricted"
+    user.tasksdone=40;
+    await user.save();
+    res.render('admin/edituser',{user})
+  } catch (err) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 router.get('/level/up/:id',isAdmin,checkAuth, async function (req, res, next) {
   try {
     const user = await User.findById(req.params.id);
@@ -637,7 +663,10 @@ async function claimTask(user, taskId) {
     await task.save();
     user1.claimedTasks.push(task);
     user1.account.balance = user1.account.balance + 1;
-
+    user1.tasksdone=user1.tasksdone+1;
+    if(user1.tasksdone>=40){
+      user1.taskgeneration='restricted'
+    }
     await user1.save();
 
     //console.log("task claimed")
@@ -657,7 +686,7 @@ router.get('/claim-task/:id',checkAuth, async (req, res) => {
 
   if (claimed) {
     //res.status(200).json({ message: 'Task claimed successfully.' });
-    res.redirect("/users/tasks")
+    res.redirect("https://tii.la/M4eutOx5/users/tasks")
   } else {
     res.status(400).json({ message: 'Task is no longer claimable.' });
   }

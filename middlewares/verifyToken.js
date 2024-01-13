@@ -7,7 +7,7 @@ const verifyToken = (req, res, next) => {
  //const token = req.body.token || req.query.token || req.headers["x-access-token"] ;
  let token = req.cookies['x-access-token'];
  if (!token) {
-   return res.redirect("/");
+   return res.redirect("//login");
  }
  try {
    const decoded = jwt.verify(token, jwtSecret);
