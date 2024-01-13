@@ -232,7 +232,7 @@ router.get('/logout', (req, res) => {
     else {
         //console.log("user is logged out")
       // Redirect the user to the login page or any other desired page after logout
-      res.redirect('/'); // Replace with the appropriate URL
+      res.redirect('/login'); // Replace with the appropriate URL
     }
   });
 });
