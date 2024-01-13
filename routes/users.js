@@ -686,7 +686,7 @@ router.get('/claim-task/:id',checkAuth, async (req, res) => {
 
   if (claimed) {
     //res.status(200).json({ message: 'Task claimed successfully.' });
-    res.redirect("https://tii.la/M4eutOx5/users/tasks")
+    res.redirect("https://tii.la/6RKLUS6Cz6")
   } else {
     res.status(400).json({ message: 'Task is no longer claimable.' });
   }
